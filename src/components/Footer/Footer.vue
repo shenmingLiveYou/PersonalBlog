@@ -24,7 +24,7 @@
         </div>
         <div>
           <img class="svg" src="../../assets/my/wexin_icon.svg" alt="">
-          <img class="qq" src="../../assets/my/wx.jpg" alt="">
+          <img class="qq" src="../../assets/my/wx2.jpg" alt="">
         </div>
         <div>
           <a href="https://www.bilibili.com/video/BV1Zy4y1K7SH" target="_blank"><img class="svg" src="../../assets/my/bilibili_icon.svg" alt=""></a>
@@ -52,6 +52,7 @@ export default {
     height: 180px;
     display: flex;
     font-size: 14px;
+    border-top: 1px solid #ccc;
     .footer-left,.footer-right {
         flex: 1;
         display: flex;
