@@ -258,10 +258,74 @@
         </div>
         <div class="card">
           <div class="title">
+            <h2>TODO</h2>
+          </div>
+          <div class="body">
+            <div class="person_info">
+              <p>事项: <span>暂无事项 持续更新中......</span></p>
+            </div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="title">
+            <h2>站点信息</h2>
+          </div>
+          <div class="body">
+            <div class="person_info">
+              <p>建站时间: <span>2023年9月13日</span></p>
+              <p>网站程序: <span>vue3.js+vitepress</span></p>
+              <p>网站版本: <span>1.1.0</span></p>
+              <p>网站空间: <span>腾讯云服务器</span></p>
+              <p>本次开发遵循如下工具规范: 
+                <ul >
+                  <li>eslint 语法工具</li>
+                  <li>style-lint - css检查工具</li>
+                  <li>prettier - 代码风格</li>
+                  <li>commit-lint -提交规范</li>
+                  <li>husky - 提交规范</li>
+                  <li>lint-staged -提交规范</li>
+                  <li>remark-lint 文档规范</li>
+                </ul>
+              </p>
+              <p>订阅内容:</p>
+              <div class="contact_info">
+                  <div class="my">
+                    <img src="../../assets/my/QQ.jpg" alt="">
+                    <span>我的QQ</span>
+                  </div>
+                  <div class="my">
+                    <img src="../../assets/my/wx2.jpg" alt="">
+                    <span>我的微信</span>
+                  </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="title">
             <h2>意见反馈</h2>
           </div>
           <div class="body">
-            主要内容区域
+            <el-form
+              ref="ruleFormRef"
+              :model="ruleForm"
+              :rules="rules"
+              class="demo-ruleForm"
+              :size="formSize"
+              status-icon
+            >
+            <el-form-item prop="Email">
+              <el-input v-model="ruleForm.Email" placeholder="请输入用于接收反馈的邮箱"/>
+            </el-form-item>
+            <el-form-item prop="desc">
+              <el-input v-model="ruleForm.desc" type="textarea" rows="7" :show-word-limit="true" placeholder="请输入你对网站的建议" />
+            </el-form-item>
+            <el-form-item>
+              <el-button type="primary" style="width: 100%;"  @click="submitForm(ruleFormRef)">
+                确定
+              </el-button>
+            </el-form-item>
+            </el-form>
           </div>
         </div>
         <div class="card">
@@ -272,18 +336,18 @@
             </div>
           </div>
           <div class="body">
-            主要内容区域
-          </div>
-        </div>
-        <div class="card">
-          <div class="title">
-            <h2>个人名片</h2>
-            <div>
-              <img src="" alt="">
-            </div>
-          </div>
-          <div class="body">
-            主要内容区域
+            <ul class="blogroll">
+              <li><a href="https://www.bilibili.com/video/BV1p84y1P7Z5/" target="_blank">HTML5+CSS3基础</a></li>
+              <li><a href="https://www.bilibili.com/video/BV1YW411T7GX/" target="_blank">JavaScript基础</a></li>
+              <li><a href="https://www.bilibili.com/video/BV1uK411H7on/" target="_blank">ES6-ES11</a></li>
+              <li><a href="https://www.bilibili.com/video/BV1gM411W7ex/" target="_blank">Node.js基础</a></li>
+              <li><a href="https://www.bilibili.com/video/BV14T4y1z7sw/" target="_blank">Webpack5入门</a></li>
+              <li><a href="https://www.bilibili.com/video/BV1Xy4y1v7S2/" target="_blank">TypeScript</a></li>
+              <li><a href="https://www.bilibili.com/video/BV1wr4y1K7tq/" target="_blank">Axios</a></li>
+              <li><a href="https://www.bilibili.com/video/BV1ts411E7qg/" target="_blank">AngularJS</a></li>
+              <li><a href="https://www.bilibili.com/video/BV1Zy4y1K7SH/" target="_blank">Vue全家桶</a></li>
+              <li><a href="https://www.bilibili.com/video/BV1wy4y1D7JT/" target="_blank">React教程</a></li>
+            </ul>
           </div>
         </div>
       </div>
@@ -305,8 +369,58 @@ import "swiper/css/navigation"; // 轮播图两边的左右箭头
 import "swiper/css/scrollbar"; // 轮播图的滚动条
 
 import {Autoplay,Navigation,Pagination,Scrollbar} from "swiper/modules";
+import { reactive, ref } from 'vue';
+import { ElMessage, type FormInstance, type FormRules } from 'element-plus';
 // 在modules加入要使用的模块
 const modules = [Autoplay, Pagination, Navigation, Scrollbar];
+
+const formSize = ref('large');
+const ruleFormRef = ref<FormInstance>()
+const ruleForm = reactive({
+  Email: '',
+  desc: '',
+})
+
+const validatePass = (rule: any, value: any, callback: any) => {
+  let reg = /^[A-Za-z\d]+([-_.][A-Za-z\d]+)*@([A-Za-z\d]+[-.])+[A-Za-z\d]{2,4}$/
+  if (value === '') {
+    callback(new Error('请输入邮箱!'))
+  } else if (!reg.test(value)) {
+    callback(new Error("请输入正确的邮箱!"))
+  } else {
+    callback()
+  }
+}
+
+const validatePass2 = (rule: any, value: any, callback: any) => {
+  if (value === '') {
+    callback(new Error('请输入您的反馈!'))
+  } else {
+    callback()
+  }
+}
+
+const rules = reactive<FormRules>({
+  Email: [{ validator: validatePass, trigger: 'blur' }],
+  desc: [{ validator: validatePass2, trigger: 'blur' }],
+})
+
+const submitForm = async (formEl: FormInstance | undefined) => {
+  if (!formEl) return
+  await formEl.validate((valid, fields) => {
+    if (valid) {
+      ElMessage({
+        message: '提交成功！',
+        type: 'success',
+      })
+    } else {
+      ElMessage({
+        message: '提交失败!请完善提交内容',
+        type: 'warning',
+      })
+    }
+  })
+}
 
 </script>
 
@@ -416,10 +530,36 @@ const modules = [Autoplay, Pagination, Navigation, Scrollbar];
         .person_info {
           p {
             margin-bottom: 5px;
-            color: #FF9800;
+            color: #d0e115;
+            font-size: 16px;
+            font-weight: 700;
             span {
               color: black;
+              font-size: 14px;
             }
+          }
+        }
+        .contact_info {
+          display: flex;
+          justify-content: space-around;
+          align-items: center;
+          .my {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+          }
+          img {
+            width: 100px;
+          }
+        }
+        .blogroll {
+          display: flex;
+          flex-wrap: wrap;
+          list-style: none;
+          padding-left: 0;
+          li {
+            width: 50%;
           }
         }
         .tags {
@@ -495,9 +635,6 @@ const modules = [Autoplay, Pagination, Navigation, Scrollbar];
           }
         }
       }
-    }
-    a {
-      color: #FF9800 !important;
     }
 }
 
