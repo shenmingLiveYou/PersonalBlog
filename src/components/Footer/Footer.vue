@@ -13,7 +13,7 @@
       </p>
       <p>建站日期：2023-09-10</p>
       <p class="beian">
-        <img src="../../assets/my/badges.png" alt=""><a href="https://beian.miit.gov.cn">湘ICP备2021010654号-4</a>
+        本项目由个人独立完成
       </p>
     </div>
     <div class="footer-right">

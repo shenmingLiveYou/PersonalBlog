@@ -13,15 +13,44 @@
             主要内容区域
           </div>
         </div>
-        <div class="card">
+        <div class="card leading_edge">
           <div class="title">
-            <h2>今日热搜</h2>
+            <h2>前沿 优势</h2>
             <div>
               <a href="#">查看更多</a>
             </div>
           </div>
           <div class="body">
-            主要内容区域
+            <div class="item mg_item">
+              <div class="icon">🎉</div>
+              <h2>简单明确</h2>
+              <p>以 Markdown 为作为编辑器，简洁明了，知识点透彻易懂！</p>
+            </div>
+            <div class="item mg_item">
+              <div class="icon">🛠️</div>
+              <h2>知识健全</h2>
+              <p>一个小白就能看懂的前端知识分享文档，知识体系全，讲解细致、透彻、简单。对学习前端知识的小伙伴有着很大的帮助。</p>
+            </div>
+            <div class="item mg_item">
+              <div class="icon">👑</div>
+              <h2>访问方便</h2>
+              <p>在线资源，可随时观看，无论是手机、平板、还是PC端，只要有网络的情况下，访问本网址就可以学习前端知识。</p>
+            </div>
+            <div class="item">
+              <div class="icon">⚡️</div>
+              <h2>上线急速</h2>
+              <p>本博客网站搭建自动化部署一套流程，只需要一键上传代码到gitlab，就可以部署上线，提高更新效率。</p>
+            </div>
+            <div class="item">
+              <div class="icon">💡</div>
+              <h2>及时更新</h2>
+              <p>及时更新，每天都会更新新的知识内容，随时随地充实对知识点的学习。</p>
+            </div>
+            <div class="item">
+              <div class="icon">📦</div>
+              <h2>开箱即用</h2>
+              <p>大白话解释知识点，片段代码注释详细，方便访问者的理解和学习。</p>
+            </div>
           </div>
         </div>
         <div class="blogpost card">
@@ -413,6 +442,8 @@ const submitForm = async (formEl: FormInstance | undefined) => {
         message: '提交成功！',
         type: 'success',
       })
+      ruleForm.Email = ''
+      ruleForm.desc = ''
     } else {
       ElMessage({
         message: '提交失败!请完善提交内容',
@@ -451,6 +482,45 @@ const submitForm = async (formEl: FormInstance | undefined) => {
       justify-content: space-between;
       .left {
         width: 69%;
+        .leading_edge {
+          .body {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+          }
+          .mg_item {
+            margin-bottom: 10px;
+            
+          }
+          .item {
+            width: 32%;
+            background-color: white;
+            border-radius: 6px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 10px;
+            height: 210px;
+            h2 {
+              font-size: 18px;
+              font-weight: 700;
+            }
+            .icon {
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              margin-bottom: 20px;
+              border-radius: 6px;
+              background-color: #ccc;
+              width: 48px;
+              height: 48px;
+              font-size: 24px;
+            }
+          }
+          .item:hover {
+            border: 1px solid #165DFF;
+          }
+        }
         .card {
           margin-bottom: 20px;
         }
